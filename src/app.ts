@@ -74,3 +74,26 @@ const producto = new ProductComponent('Portátil', 1000);
 console.log(producto.nombreProducto);       
 console.log(producto.obtenerPrecioFinal()); 
 
+interface RespuestaServidor {
+  status: 'success' | 'error';
+  data?: string[];
+  mensajeError?: string;
+}
+
+function procesarRespuesta(res: RespuestaServidor): void {
+  if (res.status === 'success') {
+  
+    res.data?.forEach(item => console.log(item));
+  } else {
+    console.log(res.mensajeError);
+  }
+}
+
+
+procesarRespuesta({ status: 'success', data: ['Mike', 'Miguel', 'Michael'] });
+
+
+procesarRespuesta({ status: 'error', mensajeError: 'Servidor no disponible' });
+
+
+procesarRespuesta({ status: 'success' }); 
